@@ -13,16 +13,19 @@ https://user-images.githubusercontent.com/37844673/148679023-6814c111-6ada-4279-
 ## Installation
 
 For [vim-plug](https://github.com/junegunn/vim-plug)
-```
+
+```vim
 Plug "ryicoh/deepl.vim"
 ```
 
 For [dein.vim](https://github.com/Shougo/dein.vim)
-```
+
+```vim
 call dein#add("ryicoh/deepl.vim")
 ```
 
 ## Configuration
+
 ```vim
 let g:deepl#endpoint = "https://api-free.deepl.com/v2/translate"
 let g:deepl#auth_key = "00000000-0000-0000-0000-000000000000:fx"
