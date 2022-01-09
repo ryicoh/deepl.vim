@@ -14,15 +14,13 @@ function! deepl#translate(input, lang)
   endtry
 endfunction
 
-
 " Replace visual selection
 " ref: https://github.com/christianrondeau/vim-base64/blob/d15253105f6a329cd0632bf9dcbf2591fb5944b8/autoload/base64.vim#L29
 function! deepl#v(lang)
 	" Preserve line breaks
 	let l:paste = &paste
 	set paste
-	" Reselect the visual mode text
-	normal! gv
+
   try
 	  " Apply transformation to the text
 	  execute "normal! c\<c-r>=deepl#translate(@\", '".a:lang."')\<cr>\<esc>"
