@@ -7,21 +7,22 @@ License : MIT license
 CONTENTS						|deepl-contents|
 
 INTRODUCTION 						|deepl-introduction|
-INTERFACE                                                |deepl-interface|
-VARIABLES                                                  |deepl-variables|
-FUNCTIONS                                                  |deepl-functions|
-ABOUT                                                           |deepl-about|
+INTERFACE						|deepl-interface|
+VARIABLES						|deepl-variables|
+FUNCTIONS						|deepl-functions|
+ABOUT							|deepl-about|
 ==============================================================================
-INTRODUCTION					*deepl-introduction*
+INTRODUCTION						*deepl-introduction*
 
 ------------------------------------------------------------------------------
-INTERFACE					*deepl-interface*
+INTERFACE						*deepl-interface*
 
 ------------------------------------------------------------------------------
-VARIABLES					*deepl-variables*
+VARIABLES						*deepl-variables*
 
-g:deepl#endpoint			*g:deepl#endpoint* Switch endpoints to
-your plan of DeepL.
+g:deepl#endpoint					*g:deepl#endpoint* 
+
+  Switch endpoints to your plan of DeepL.
 
   * DeepL API Pro
   let g:deepl#endpoint = "https://api.deepl.com/v2/translate"
@@ -29,24 +30,25 @@ your plan of DeepL.
   * DeepL API Free
   let g:deepl#endpoint = "https://api-free.deepl.com/v2/translate"
 
-g:deepl#auth_key			*g:deepl#auth_key* Set your
-Authentication Key for DeepL API. You can get it on your account page
-(https://www.deepl.com/pro-account/summary).
+g:deepl#auth_key					*g:deepl#auth_key*
+
+  Set your Authentication Key for DeepL API. You can get it on your account
+  page (https://www.deepl.com/pro-account/summary).
 
 >
   let g:deepl#auth_key = "00000000-0000-0000-0000-000000000000:fx"
 <
 
-  We recommend to set the auth key from environment variable.
+  We recommend to set the auth key from environment variable for security.
 
 >
   let g:deepl#auth_key = $DEEPL_AUTH_KEY
 <
 
 ------------------------------------------------------------------------------
-FUNCTIONS					*deepl-functions*
+FUNCTIONS						*deepl-functions*
 
-deepl#translate({text}, {lang})			*deepl#translate()*
+deepl#translate({text}, {lang})				*deepl#translate()*
   Translate a text.
 
   {text} is original text.
@@ -59,7 +61,7 @@ deepl#translate({text}, {lang})			*deepl#translate()*
 <
 
 ==============================================================================
-ABOUT					*deepl-about*
+ABOUT							*deepl-about*
 
 Download the latest version or report a bug on GitHub:
 
