@@ -1,6 +1,6 @@
 # deepl.vim
 
-Deepl translation plugin for Vim/NeoVim.
+DeepL translation plugin for Vim/NeoVim.
 
 ## Demo
 
@@ -19,7 +19,7 @@ Plug "ryicoh/deepl.vim"
 
 For [dein.vim](https://github.com/Shougo/dein.vim)
 ```
-Plug "ryicoh/deepl.vim"
+call dein#add("ryicoh/deepl.vim")
 ```
 
 ## Configuration
