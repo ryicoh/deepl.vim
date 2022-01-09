@@ -2,6 +2,12 @@
 
 ## Demo
 
+
+
+https://user-images.githubusercontent.com/37844673/148679023-6814c111-6ada-4279-99ea-cd29afc6a1f3.mov
+
+
+
 ## Configuration
 ```vim
 let g:deepl#endpoint = "https://api-free.deepl.com/v2/translate"
