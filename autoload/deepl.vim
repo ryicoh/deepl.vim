@@ -2,7 +2,7 @@
 function! deepl#translate(input, lang)
   let cmd = "curl -sS ".g:deepl#endpoint
   let cmd = cmd.' -d "auth_key='.g:deepl#auth_key.'"'
-  let cmd = cmd.' -d "text='.a:input.'"'
+  let cmd = cmd.' -d "text='.substitute(a:input, '"', '\\"', 'g').'"'
   let cmd = cmd.' -d "target_lang='.a:lang.'"'
 
   try
