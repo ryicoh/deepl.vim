@@ -6,16 +6,9 @@ License : MIT license
 ==============================================================================
 CONTENTS						|deepl-contents|
 
-INTRODUCTION 						|deepl-introduction|
-INTERFACE						|deepl-interface|
 VARIABLES						|deepl-variables|
 FUNCTIONS						|deepl-functions|
 ABOUT							|deepl-about|
-==============================================================================
-INTRODUCTION						*deepl-introduction*
-
-------------------------------------------------------------------------------
-INTERFACE						*deepl-interface*
 
 ------------------------------------------------------------------------------
 VARIABLES						*deepl-variables*
@@ -48,16 +41,20 @@ g:deepl#auth_key					*g:deepl#auth_key*
 ------------------------------------------------------------------------------
 FUNCTIONS						*deepl-functions*
 
-deepl#translate({text}, {lang})				*deepl#translate()*
+deepl#translate({text}, {target_lang}, {target_lang})	*deepl#translate()*
   Translate a text.
 
   {text} is original text.
-  {lang} is two char of target language like 'EN'.
+  {target_lang} is two char of target language like 'EN'.
+  {source_lang} is two char of source language like 'EN'.
 
   Example:
 >
     call deepl#translate("Hello", "JA")
     " => こんにちは
+
+    call deepl#translate("I also speak French.", "FR", "EN")
+    " => Je parle aussi le français.
 <
 
 ==============================================================================
