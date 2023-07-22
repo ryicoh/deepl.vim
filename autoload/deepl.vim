@@ -1,12 +1,14 @@
 " Send a translation request to deepl using curl
 function! deepl#translate(input, target_lang, source_lang = "")
-  let cmd = "curl -sS ".g:deepl#endpoint
-  let cmd = cmd.' -d "auth_key='.g:deepl#auth_key.'"'
-  let cmd = cmd.' -d "text='.substitute(a:input, '"', '\\"', 'g').'"'
-  let cmd = cmd.' -d "target_lang='.a:target_lang.'"'
+  let cmd = "curl -sS -X POST ".g:deepl#endpoint
+  let cmd = cmd.' --header "Authorization: DeepL-Auth-Key '.g:deepl#auth_key.'"'
+  let l:strings = substitute(a:input, '`', '\\`', 'g')
+  let l:strings = substitute(l:strings, '"', '\\"', 'g')
+  let cmd = cmd.' --data-urlencode "text='.l:strings.'"'
+  let cmd = cmd.' --data-urlencode "target_lang='.a:target_lang.'"'
 
   if a:source_lang != ""
-    let cmd = cmd.' -d "source_lang='.a:source_lang.'"'
+    let cmd = cmd.' --data-urlendoce "source_lang='.a:source_lang.'"'
   endif
 
   try
