@@ -1,4 +1,4 @@
-# deepl.vim
+# deepl.vim [![Test](https://github.com/ryicoh/deepl.vim/actions/workflows/test.yml/badge.svg)](https://github.com/ryicoh/deepl.vim/actions/workflows/test.yml)
 
 DeepL translation plugin for Vim/NeoVim.
 
