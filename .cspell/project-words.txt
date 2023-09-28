@@ -27,6 +27,7 @@ matchstr
 norl
 shellescape
 echoerr
+readfile
 
 # Name of variable
 funcs
