@@ -1,0 +1,52 @@
+name: Test
+on: [push]
+jobs:
+  test:
+    name: ${{ matrix.os }} / ${{ matrix.vi }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, macos-11]
+        vi: [neovim, vim]
+    steps:
+      - name: Clone deepl.vim
+        uses: actions/checkout@v2
+
+      - name: Use Golang
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.21
+
+      - name: Run mock server
+        run: go run ./test/server.go &
+
+      - name: Install vim-themis
+        uses: actions/checkout@v2
+        with:
+          repository: thinca/vim-themis
+          path: vim-themis
+
+      - name: Install ${{ matrix.vi }}
+        uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          version: 'stable'
+          neovim: ${{ matrix.vi == 'neovim' }}
+
+      - name: Wait for mock server to start
+        timeout-minutes: 1
+        run: while ! curl -s http://localhost:8080/ > /dev/null; do sleep 0.1; done
+
+      - name: Run tests
+        timeout-minutes: 5
+        env:
+          THEMIS_VIM: ${{ steps.vim.outputs.executable }}
+        run: ./vim-themis/bin/themis ./test/test.vim
+  post-test:
+    name: All tests passed
+    runs-on: ubuntu-20.04
+    needs: test
+    steps:
+      - run: echo ok

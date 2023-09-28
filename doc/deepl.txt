@@ -1,4 +1,4 @@
-*deepl.txt*  DeepL transration plugin
+*deepl.txt*  DeepL translation plugin
 
 Author  : ryicoh / ryicoh@gmail.com
 License : MIT license
