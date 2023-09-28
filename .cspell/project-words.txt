@@ -1,0 +1,40 @@
+# Proper Name
+Ryuichiroh
+Ikeuchi
+ryicoh
+kamykn
+Neovim
+deepl
+dein
+
+# Vim syntax
+endfunction
+endfor
+endtry
+
+# Vim commands or functions
+bufnr
+doautocmd
+autocmd
+augroup
+stridx
+fnamemodify
+autoload
+hlexists
+matchdelete
+matchadd
+matchstr
+norl
+shellescape
+echoerr
+
+# Name of variable
+funcs
+autogroup
+vmap
+nmap
+
+# FR
+parle
+aussi
+noet

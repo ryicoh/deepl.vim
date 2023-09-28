@@ -1,21 +1,20 @@
 " Send a translation request to deepl using curl
 function! deepl#translate(input, target_lang, source_lang = "")
-  let cmd = "curl -sS ".g:deepl#endpoint
-  let cmd = cmd.' -d "auth_key='.g:deepl#auth_key.'"'
-  let cmd = cmd.' -d "text='.substitute(a:input, '"', '\\"', 'g').'"'
-  let cmd = cmd.' -d "target_lang='.a:target_lang.'"'
+  let cmd = "curl -sS " .. g:deepl#endpoint
+  let cmd = cmd .. ' -d "auth_key=' .. g:deepl#auth_key .. '"'
+  let cmd = cmd .. ' -d ' .. shellescape('text=' .. a:input)
+  let cmd = cmd .. ' -d "target_lang=' .. a:target_lang .. '"'
 
   if a:source_lang != ""
-    let cmd = cmd.' -d "source_lang='.a:source_lang.'"'
+    let cmd = cmd .. ' -d "source_lang=' .. a:source_lang .. '"'
   endif
 
   try
     const res = json_decode(system(cmd))
-    echomsg res
     return res["translations"][0]["text"]
 
   catch /.*/
-    echoerr "error: " . v:exception
+    echoerr "error: " .. v:exception
   endtry
 endfunction
 
@@ -29,9 +28,9 @@ function! deepl#v(target_lang, source_lang = "")
   try
     " Apply transformation to the text
     if a:source_lang == ""
-      execute "normal! c\<C-r>=deepl#translate(@\", '".a:target_lang."')\<CR>\<Esc>"
+      execute "normal! c\<C-r>=deepl#translate(@\", '" .. a:target_lang .. "')\<CR>\<Esc>"
     else
-      execute "normal! c\<C-r>=deepl#translate(@\", '".a:target_lang."', '".a:source_lang."')\<CR>\<Esc>"
+      execute "normal! c\<C-r>=deepl#translate(@\", '" .. a:target_lang .. "', '" .. a:source_lang .. "')\<CR>\<Esc>"
     endif
   finally
     " Select the new text
