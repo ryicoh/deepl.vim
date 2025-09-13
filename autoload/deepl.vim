@@ -25,6 +25,12 @@ function! deepl#v(target_lang, source_lang = "")
   let l:paste = &paste
   set paste
 
+  " Avoid superfluous trailing newline after translating a visual linewise
+  " selection by changing it to a characterwise selection.
+  if mode() == "V"
+    execute "normal! \<ESC>`<v`>h\<ESC>gv"
+  endif
+
   try
     " Apply transformation to the text
     if a:source_lang == ""
