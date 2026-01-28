@@ -14,6 +14,14 @@ function! deepl#translate(input, target_lang, source_lang = "")
   let cmd = cmd .. ' -d ' .. shellescape(json_encode(data))
 
   try
+    " Note: Somewhere in Q4/2025-Q1/2026 DeepL seems to have changed the API
+    "       and since then all(?) newlines are translated to spaces in the
+    "       reply.
+    "       So the measure below for the trailing newline is no longer needed.
+    "
+    " {"target_lang":"EN","text":["Zeile1\nZeile2\n"]}
+    " ==>
+    " {"translations":[{"text":"Line1 Line2 ","detected_source_language":"DE"}]}
     const res = json_decode(system(cmd))
     return res["translations"][0]["text"]
 
@@ -31,9 +39,9 @@ function! deepl#v(target_lang, source_lang = "")
 
   " Avoid superfluous trailing newline after translating a visual linewise
   " selection by changing it to a characterwise selection.
-  if mode() == "V"
-    execute "normal! \<ESC>`<v`>h\<ESC>gv"
-  endif
+  "if mode() == "V"
+  "  execute "normal! \<ESC>`<v`>h\<ESC>gv"
+  "endif
 
   try
     " Apply transformation to the text
