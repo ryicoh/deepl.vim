@@ -1,7 +1,7 @@
 " Send a translation request to deepl using curl
 function! deepl#translate(input, target_lang, source_lang = "")
   let data = #{
-        \ text: [a:input],
+        \ text: split(a:input, '\n\n'),
         \ target_lang: a:target_lang,
         \ }
   if a:source_lang != ""
@@ -17,13 +17,24 @@ function! deepl#translate(input, target_lang, source_lang = "")
     " Note: Somewhere in Q4/2025-Q1/2026 DeepL seems to have changed the API
     "       and since then all(?) newlines are translated to spaces in the
     "       reply.
-    "       So the measure below for the trailing newline is no longer needed.
+    "       So the workaround below for the trailing newline is no longer needed.
     "
     " {"target_lang":"EN","text":["Zeile1\nZeile2\n"]}
     " ==>
     " {"translations":[{"text":"Line1 Line2 ","detected_source_language":"DE"}]}
     const res = json_decode(system(cmd))
-    return res["translations"][0]["text"]
+    " But now the preformatting (via newlines) gets lost...
+    "
+    " This is fixed here by splitting the text on double newlines (paragraph
+    " boundaries) above and join it after translation again the same way.
+    "
+    let res2 = []
+    for p in res["translations"]
+      call add(res2, p["text"])
+    endfor
+    " Remove final trailing space character
+    " (needed when translating a visual linewise block)
+    return substitute(join(res2, "\n\n"), " $", "", "")
 
   catch /.*/
     echoerr "error: " .. v:exception
@@ -37,6 +48,7 @@ function! deepl#v(target_lang, source_lang = "")
   let l:paste = &paste
   set paste
 
+  " Workaround no longer needed, see above.
   " Avoid superfluous trailing newline after translating a visual linewise
   " selection by changing it to a characterwise selection.
   "if mode() == "V"
